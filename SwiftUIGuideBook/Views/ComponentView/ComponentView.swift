@@ -39,6 +39,7 @@ struct TestComponentView: View {
             content
             Spacer()
         }
+            .padding(.vertical, 10)
             .contentShape(Rectangle())
     }
 
@@ -51,24 +52,27 @@ struct TestComponentView: View {
         }
             .padding(.init(top: 5, leading: 10, bottom: 5, trailing: 10))
             .background(RoundedRectangle(cornerRadius: 20).fill(.blue))
+            .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
     }
-    
+
     private var content: some View {
         VStack(alignment: .leading) {
-            Text(compoenet.name).font(.headline)
+            HStack {
+                Text(compoenet.name).font(.headline)
+                Spacer()
+                isExpanded ? Image(systemName: "chevron.up") : Image(systemName: "chevron.down")
+            }
             if isExpanded {
                 HStack {
                     switch compoenet.name {
                     case ComponentName.Alert.rawValue:
                         Button(action: { isAlert = true }, label: {
                                 playButton
-                                    .frame(width: 100, alignment: .center)
                             })
                             .alert("alert", isPresented: $isAlert) { }
                     case ComponentName.ActionSheet.rawValue:
                         Button(action: { isActionSheet = true }, label: {
                                 playButton
-                                    .frame(width: 100, alignment: .center)
                             })
                             .confirmationDialog(Text(compoenet.name), isPresented: $isActionSheet, actions: {
                                 Button("Delete", role: .destructive) { }
@@ -79,7 +83,6 @@ struct TestComponentView: View {
                     case ComponentName.ActivityView.rawValue:
                         Button(action: { isActivityView = true }, label: {
                                 playButton
-                                    .frame(width: 100, alignment: .center)
                             })
                             .background(
                             ActivityView(
@@ -88,14 +91,26 @@ struct TestComponentView: View {
                             )
                         )
                     case ComponentName.Sheet.rawValue:
-                        Button(action: { }, label: {
+                        Button(action: { isSheet = true }, label: {
                                 playButton
-                                    .frame(width: 100, alignment: .center)
                             })
+                        .sheet(isPresented: $isSheet) {
+                            NavigationView {
+                                Text("Swipe down to dismiss")
+                                    .toolbar() {
+                                        ToolbarItem(placement: .primaryAction) {
+                                            Button(action: {
+                                                self.isSheet = false
+                                            }) {
+                                                Text("Done").fontWeight(.semibold)
+                                            }
+                                        }
+                                    }
+                            }
+                        }
                     case ComponentName.FullScreenCover.rawValue:
                         Button(action: { }, label: {
                                 playButton
-                                    .frame(width: 100, alignment: .center)
                             })
                     default:
                         Text("Default")
@@ -104,16 +119,17 @@ struct TestComponentView: View {
                             Image(systemName: "curlybraces.square.fill")
                                 .font(.system(size: 30))
                                 .foregroundColor(.blue)
-                                .frame(width: 100, alignment: .center)
+                                .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
                         })
 
                     Button(action: { }, label: {
                             Image(systemName: "doc.fill")
                                 .font(.system(size: 25))
                                 .foregroundColor(.blue)
-                                .frame(width: 100, alignment: .center)
+                                .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
                         })
                 }
+                    .padding(.vertical, 10)
             }
         }
     }
@@ -121,7 +137,7 @@ struct TestComponentView: View {
 
 struct ComponentView: View {
     let components: [Component]
-    @State private var selection: Set<Component> = []
+    @State private var selection: Set<Component> = [Component(id: 0, name: ComponentName.Alert.rawValue, code: "Code", URL: "URL")]
 
     var body: some View {
         ScrollView {
