@@ -69,7 +69,7 @@ struct TestComponentView: View {
                         Button(action: { isAlert = true }, label: {
                                 playButton
                             })
-                            .alert("alert", isPresented: $isAlert) { }
+                            .alert("This is Alert", isPresented: $isAlert) { }
                     case ComponentName.ActionSheet.rawValue:
                         Button(action: { isActionSheet = true }, label: {
                                 playButton
@@ -109,9 +109,23 @@ struct TestComponentView: View {
                             }
                         }
                     case ComponentName.FullScreenCover.rawValue:
-                        Button(action: { }, label: {
+                        Button(action: { isFullScreenCover = true }, label: {
                                 playButton
                             })
+                        .fullScreenCover(isPresented: $isFullScreenCover) {
+                            NavigationView {
+                                Text("Tap to done")
+                                    .toolbar {
+                                        ToolbarItem(placement: .primaryAction) {
+                                            Button(action: {
+                                                self.isFullScreenCover = false
+                                            }) {
+                                                Text("Done").fontWeight(.semibold)
+                                            }
+                                        }
+                                    }
+                            }
+                        }
                     default:
                         Text("Default")
                     }
