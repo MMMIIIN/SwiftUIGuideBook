@@ -13,6 +13,7 @@
 		3925A29B281D30F0009387CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3925A29A281D30F0009387CF /* Preview Assets.xcassets */; };
 		3925A2A5281D322F009387CF /* ComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3925A2A4281D322E009387CF /* ComponentView.swift */; };
 		3925A2A7281D3239009387CF /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3925A2A6281D3239009387CF /* TipView.swift */; };
+		396500BC281FBA2300220927 /* ComponentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396500BB281FBA2300220927 /* ComponentData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		3925A29A281D30F0009387CF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3925A2A4281D322E009387CF /* ComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentView.swift; sourceTree = "<group>"; };
 		3925A2A6281D3239009387CF /* TipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipView.swift; sourceTree = "<group>"; };
+		396500BB281FBA2300220927 /* ComponentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		3925A292281D30F0009387CF /* SwiftUIGuideBook */ = {
 			isa = PBXGroup;
 			children = (
+				396500BB281FBA2300220927 /* ComponentData.swift */,
 				3925A2A1281D3200009387CF /* Views */,
 				3925A293281D30F0009387CF /* SwiftUIGuideBookApp.swift */,
 				3925A295281D30F0009387CF /* ContentView.swift */,
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3925A2A7281D3239009387CF /* TipView.swift in Sources */,
+				396500BC281FBA2300220927 /* ComponentData.swift in Sources */,
 				3925A296281D30F0009387CF /* ContentView.swift in Sources */,
 				3925A294281D30F0009387CF /* SwiftUIGuideBookApp.swift in Sources */,
 				3925A2A5281D322F009387CF /* ComponentView.swift in Sources */,
