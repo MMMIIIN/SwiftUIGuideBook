@@ -4,7 +4,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            ComponentView(places: Place.samples())
+            ComponentView(components: Component.all())
                 .tabItem {
                     Image(systemName: "cube.fill")
                     Text("Component")

@@ -1,33 +1,38 @@
 import SwiftUI
 
-struct Place: Identifiable, Hashable {
-    let id: Int
-    let name: String
-    let country: String
-    let city: String
-    let street: String
-    let zip: String
-    let phoneNumber: String
+public struct ActivityView: UIViewControllerRepresentable {
+    @Binding var isPresented: Bool
+    public let activityItmes: [Any]
+    public let applicationActivities: [UIActivity]? = nil
 
-    static func samples() -> [Place] { (0..<100).map(Place.fixture) }
+    public func makeUIViewController(context: Context) -> UIViewController {
+        UIViewController()
+    }
 
-    private static func fixture(_ id: Int) -> Place {
-        Place(
-            id: id,
-            name: "Place #\(id)",
-            country: "Country #\(id)",
-            city: "City #\(id)",
-            street: "Street #\(id)",
-            zip: "Zip #\(id)",
-            phoneNumber: "Phone #\(id)"
+    public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        let activityViewController = UIActivityViewController(
+            activityItems: activityItmes,
+            applicationActivities: applicationActivities
         )
+
+        if isPresented && uiViewController.presentedViewController == nil {
+            uiViewController.present(activityViewController, animated: true)
+        }
+        activityViewController.completionWithItemsHandler = { (_, _, _, _) in
+            isPresented = false
+        }
     }
 }
 
-struct PlaceView: View {
-    let place: Place
+struct TestComponentView: View {
+    let compoenet: Component
     let isExpanded: Bool
-    @State private var isModalView: Bool = false
+
+    @State private var isAlert: Bool = false
+    @State private var isActionSheet: Bool = false
+    @State private var isActivityView: Bool = false
+    @State private var isSheet: Bool = false
+    @State private var isFullScreenCover: Bool = false
 
     var body: some View {
         HStack {
@@ -37,104 +42,103 @@ struct PlaceView: View {
             .contentShape(Rectangle())
     }
 
+    private var playButton: some View {
+        HStack {
+            Image(systemName: "play.fill")
+                .foregroundColor(.white)
+            Text("Play")
+                .foregroundColor(.white)
+        }
+            .padding(.init(top: 5, leading: 10, bottom: 5, trailing: 10))
+            .background(RoundedRectangle(cornerRadius: 20).fill(.blue))
+    }
+    
     private var content: some View {
         VStack(alignment: .leading) {
-            Text(place.name).font(.headline)
-
+            Text(compoenet.name).font(.headline)
             if isExpanded {
-                VStack(alignment: .leading) {
-                    Button("Button") {
-                        self.isModalView = true
+                HStack {
+                    switch compoenet.name {
+                    case ComponentName.Alert.rawValue:
+                        Button(action: { isAlert = true }, label: {
+                                playButton
+                                    .frame(width: 100, alignment: .center)
+                            })
+                            .alert("alert", isPresented: $isAlert) { }
+                    case ComponentName.ActionSheet.rawValue:
+                        Button(action: { isActionSheet = true }, label: {
+                                playButton
+                                    .frame(width: 100, alignment: .center)
+                            })
+                            .confirmationDialog(Text(compoenet.name), isPresented: $isActionSheet, actions: {
+                                Button("Delete", role: .destructive) { }
+                                Button("Option 1") { }
+                                Button("Option 2") { }
+                                Button("Cancle", role: .cancel) { }
+                            })
+                    case ComponentName.ActivityView.rawValue:
+                        Button(action: { isActivityView = true }, label: {
+                                playButton
+                                    .frame(width: 100, alignment: .center)
+                            })
+                            .background(
+                            ActivityView(
+                                isPresented: $isActivityView,
+                                activityItmes: [URL(string: "https://github.com/MMMIIIN")!]
+                            )
+                        )
+                    case ComponentName.Sheet.rawValue:
+                        Button(action: { }, label: {
+                                playButton
+                                    .frame(width: 100, alignment: .center)
+                            })
+                    case ComponentName.FullScreenCover.rawValue:
+                        Button(action: { }, label: {
+                                playButton
+                                    .frame(width: 100, alignment: .center)
+                            })
+                    default:
+                        Text("Default")
                     }
-                        .sheet(isPresented: $isModalView) {
-                        NavigationView {
-                            Text("Swipe down to dismiss")
-                        }
-                    }
+                    Button(action: { }, label: {
+                            Image(systemName: "curlybraces.square.fill")
+                                .font(.system(size: 30))
+                                .foregroundColor(.blue)
+                                .frame(width: 100, alignment: .center)
+                        })
+
+                    Button(action: { }, label: {
+                            Image(systemName: "doc.fill")
+                                .font(.system(size: 25))
+                                .foregroundColor(.blue)
+                                .frame(width: 100, alignment: .center)
+                        })
                 }
             }
         }
     }
 }
 
-struct FilledButton: View {
-    let title: String
-    let action: () -> Void
-
-    var body: some View {
-        Button(title, action: action)
-            .foregroundColor(.white)
-            .padding()
-            .background(Color.accentColor)
-            .cornerRadius(8)
-    }
-}
-
-//struct Component: View {
-//    let componentName: String
-//    let code: String
-//    let URL: String
-//    var body: some View {
-//        HStack {
-//            selectAction(modifierName: "Alert")
-//        }
-//    }
-
-//    func selectAction(modifierName: String) -> some View {
-//        var testBool: Bool = false
-//        switch modifierName {
-//        case "Alert" :
-//            return Button("name") {
-//                testBool = true
-//            }
-//                .alert("Testing", isPresented: testBool)
-//            {
-//                Button("삭제할래요", role: .destructive) {}
-//                Button("아니요", role: .cancel) {}
-//            }
-//        default:
-//            return Button("NULL") {}
-//                .alert("Testing", isPresented: testBool)
-//            {
-//                Button("삭제할래요", role: .destructive) {}
-//                Button("아니요", role: .cancel) {}
-//            }
-//        }
-//    }
-//}
-
 struct ComponentView: View {
-    let places: [Place]
-    @State private var selection: Set<Place> = []
+    let components: [Component]
+    @State private var selection: Set<Component> = []
 
     var body: some View {
-//        Component(componentName: "ComponentName", code: "testCode", URL: "testURL")
-
         ScrollView {
-            ForEach(places) { place in
-                PlaceView(place: place, isExpanded: self.selection.contains(place))
-                    .onTapGesture { self.selectDeselect(place) }
+            ForEach(components, id: \.name) { value in
+                TestComponentView(compoenet: value, isExpanded: self.selection.contains(value))
+                    .onTapGesture { self.selectDeselect(value) }
                     .modifier(ListRowModifier())
-                    .animation(.linear(duration: 0.3))
+                    .animation(Animation.linear(duration: 0.3))
             }
-
         }
     }
 
-    private func selectDeselect(_ place: Place) {
-        if selection.contains(place) {
-            selection.remove(place)
+    private func selectDeselect(_ value: Component) {
+        if selection.contains(value) {
+            selection.remove(value)
         } else {
-            selection.insert(place)
-        }
-    }
-}
-
-struct NoelTestStruct: View {
-    @Binding var testString: String
-    var body: some View {
-        Button("Change!!") {
-            testString = "NoelBabo"
+            selection.insert(value)
         }
     }
 }
@@ -144,12 +148,13 @@ struct ListRowModifier: ViewModifier {
         Group {
             content
             Divider()
-        }.offset(x: 20)
+        }
+            .padding(.horizontal, 16)
     }
 }
 
-//struct ComponentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ComponentView(places: ([Place(id: 0, name: "")]))
-//    }
-//}
+struct ComponentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ComponentView(components: Component.all())
+    }
+}
