@@ -94,36 +94,36 @@ struct TestComponentView: View {
                         Button(action: { isSheet = true }, label: {
                                 playButton
                             })
-                        .sheet(isPresented: $isSheet) {
+                            .sheet(isPresented: $isSheet) {
                             NavigationView {
                                 Text("Swipe down to dismiss")
                                     .toolbar() {
-                                        ToolbarItem(placement: .primaryAction) {
-                                            Button(action: {
-                                                self.isSheet = false
-                                            }) {
-                                                Text("Done").fontWeight(.semibold)
-                                            }
+                                    ToolbarItem(placement: .primaryAction) {
+                                        Button(action: {
+                                            self.isSheet = false
+                                        }) {
+                                            Text("Done").fontWeight(.semibold)
                                         }
                                     }
+                                }
                             }
                         }
                     case ComponentName.FullScreenCover.rawValue:
                         Button(action: { isFullScreenCover = true }, label: {
                                 playButton
                             })
-                        .fullScreenCover(isPresented: $isFullScreenCover) {
+                            .fullScreenCover(isPresented: $isFullScreenCover) {
                             NavigationView {
                                 Text("Tap to done")
                                     .toolbar {
-                                        ToolbarItem(placement: .primaryAction) {
-                                            Button(action: {
-                                                self.isFullScreenCover = false
-                                            }) {
-                                                Text("Done").fontWeight(.semibold)
-                                            }
+                                    ToolbarItem(placement: .primaryAction) {
+                                        Button(action: {
+                                            self.isFullScreenCover = false
+                                        }) {
+                                            Text("Done").fontWeight(.semibold)
                                         }
                                     }
+                                }
                             }
                         }
                     default:
@@ -135,13 +135,13 @@ struct TestComponentView: View {
                                 .foregroundColor(.blue)
                                 .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
                         })
-
-                    Button(action: { }, label: {
-                            Image(systemName: "doc.fill")
-                                .font(.system(size: 25))
-                                .foregroundColor(.blue)
-                                .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
-                        })
+                    
+                    Link(destination: URL(string: compoenet.URL)!, label: {
+                        Image(systemName: "doc.fill")
+                            .font(.system(size: 25))
+                            .foregroundColor(.blue)
+                            .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
+                                })
                 }
                     .padding(.vertical, 10)
             }

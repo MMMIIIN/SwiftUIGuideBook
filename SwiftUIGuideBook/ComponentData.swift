@@ -14,11 +14,11 @@ struct Component: Identifiable, Hashable {
 
     static func all() -> [Component] {
         return [
-            Component(id: 0, name: ComponentName.Alert.rawValue, code: "Code", URL: "URL"),
-            Component(id: 1, name: ComponentName.ActionSheet.rawValue, code: "Code", URL: "URL"),
-            Component(id: 2, name: ComponentName.ActivityView.rawValue, code: "Code", URL: "URL"),
-            Component(id: 3, name: ComponentName.Sheet.rawValue, code: "Code", URL: "URL"),
-            Component(id: 4, name: ComponentName.FullScreenCover.rawValue, code: "Code", URL: "URL")
+            Component(id: 0, name: ComponentName.Alert.rawValue, code: "Code", URL: "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l"),
+            Component(id: 1, name: ComponentName.ActionSheet.rawValue, code: "Code", URL: "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-8y541"),
+            Component(id: 2, name: ComponentName.ActivityView.rawValue, code: "Code", URL: "https://developer.apple.com/documentation/uikit/uiactivity/1620678-activityviewcontroller/"),
+            Component(id: 3, name: ComponentName.Sheet.rawValue, code: "Code", URL: "https://developer.apple.com/documentation/SwiftUI/View/sheet(isPresented:onDismiss:content:)"),
+            Component(id: 4, name: ComponentName.FullScreenCover.rawValue, code: "Code", URL: "https://developer.apple.com/documentation/swiftui/path/fullscreencover(item:ondismiss:content:)/")
         ]
     }
 }
