@@ -11,7 +11,7 @@ struct ContentView: View {
                         Image(systemName: "cube.fill")
                         Text("Component")
                     }.tag(1)
-                    TipView(componentList: Component.all())
+                    TipView()
                         .tabItem {
                         Image(systemName: "shippingbox.fill")
                         Text("Tip")
