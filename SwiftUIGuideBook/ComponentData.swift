@@ -6,6 +6,7 @@ enum ComponentName: String {
     case FullScreenCover = "Full Screen Cover"
     case Indicator = "Indicator"
     case ProgressBar = "Progress Bar"
+    case ColorPicker = "Color Picker"
 }
 
 struct Component: Identifiable, Hashable {
