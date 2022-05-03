@@ -7,6 +7,7 @@ struct MapView: View {
     var body: some View {
         Map(coordinateRegion: $coordinateRegion)
             .aspectRatio(1.0, contentMode: .fill)
+            .navigationBarTitle("Map View")
     }
 }
 

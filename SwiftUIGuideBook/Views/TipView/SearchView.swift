@@ -45,7 +45,6 @@ struct SearchView: View {
                 }
             }
                 .listStyle(GroupedListStyle())
-                .navigationTitle(searching ? "searching" : "MyFruits")
                 .toolbar {
                 if searching {
                     Button("Cancel") {
@@ -58,6 +57,7 @@ struct SearchView: View {
                 }
             }
         }
+        .navigationBarTitle("Search Bar")
     }
 }
 

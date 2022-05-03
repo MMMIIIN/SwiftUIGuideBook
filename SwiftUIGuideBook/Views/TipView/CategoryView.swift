@@ -2,35 +2,42 @@ import SwiftUI
 
 struct CategoryView: View {
     @State private var currentDevice: String = "Mac"
-    private var testList = ["Mac", "iPhone", "iPad", "Apple Watch","Apple TV", "Accessory"]
-    
+    private var testList = ["Mac", "iPhone", "iPad", "Apple Watch", "Apple TV", "Accessory"]
+
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Category Button")
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(testList, id: \.self) { value in
-                        currentDevice == value
-                            ? Button(action: { }, label: { Text(value)
-                                    .padding(.all, 10)
-                                    .foregroundColor(.white)
-                                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(.black, lineWidth: 1))
-                                    .background(RoundedRectangle(cornerRadius: 15).fill(.black))
+        GeometryReader { geometry in
+            VStack(alignment: .leading) {
+                Text("Category Button")
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(testList, id: \.self) { value in
+                            currentDevice == value
+                                ? Button(action: { }, label: { Text(value)
+                                        .padding(.all, 10)
+                                        .foregroundColor(.white)
+                                        .overlay(RoundedRectangle(cornerRadius: 15).stroke(.black, lineWidth: 1))
+                                        .background(RoundedRectangle(cornerRadius: 15).fill(.black))
                                 })
-                        : Button(action: {
-                            currentDevice = value
-                        }, label: {
-                            Text(value)
-                                .padding(.all, 10)
-                                .foregroundColor(.black)
-                                .overlay(RoundedRectangle(cornerRadius: 15).stroke(.black, lineWidth: 1))
-                                .background(RoundedRectangle(cornerRadius: 15).fill(.white))
-                        })
+                            : Button(action: {
+                                currentDevice = value
+                            }, label: {
+                                    Text(value)
+                                        .padding(.all, 10)
+                                        .foregroundColor(.black)
+                                        .overlay(RoundedRectangle(cornerRadius: 15).stroke(.black, lineWidth: 1))
+                                        .background(RoundedRectangle(cornerRadius: 15).fill(.white))
+                                })
+                        }
+                            .padding(.all, 5)
                     }
-                    .padding(.all, 5)
                 }
-            }
-        }.padding()
+                ScrollView(.horizontal) {
+                    Image("category_screenshot")
+                        .resizable()
+                    .aspectRatio(contentMode: .fill)
+                }
+            }.padding()
+        }
     }
 }
 

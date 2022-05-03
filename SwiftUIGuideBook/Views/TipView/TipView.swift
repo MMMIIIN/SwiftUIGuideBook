@@ -7,13 +7,15 @@ struct TipView: View {
             NavigationLink(destination: CategoryView(), label: {
                     Text("Category View")
                 })
-                .navigationTitle("Category View")
             NavigationLink(destination: SearchView(), label: {
                     Text("Search View")
                 })
             NavigationLink(destination: MapView(), label: {
-                Text("Map View")
-            })
+                    Text("Map View")
+                })
+            NavigationLink(destination: PickerView(), label: {
+                    Text("Picker View")
+                })
         }
     }
 }
