@@ -27,6 +27,8 @@ public struct ActivityView: UIViewControllerRepresentable {
 struct TestComponentView: View {
     let compoenet: Component
     let isExpanded: Bool
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    @State private var progress: Double = 0.0
     @State private var isCodeBlock: Bool = false
     @State private var isAlert: Bool = false
     @State private var isActionSheet: Bool = false
@@ -36,7 +38,6 @@ struct TestComponentView: View {
 
     var body: some View {
         HStack {
-
             content
             Spacer()
         }
@@ -127,6 +128,28 @@ struct TestComponentView: View {
                                 }
                             }
                         }
+                    case ComponentName.Indicator.rawValue:
+                        ProgressView(label: {
+                            Text("Loading").font(.caption).foregroundColor(.secondary)
+                        }).progressViewStyle(CircularProgressViewStyle())
+                            .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
+                    case ComponentName.ProgressBar.rawValue:
+                            ProgressView(value: progress, total: 100,
+                                label: {
+                                    Text("Downloading...")
+                                        .padding(.bottom, 4)
+                                }, currentValueLabel: {
+                                    Text("\(Int(progress))%")
+                                        .padding(.top, 4)
+                                }
+                            ).progressViewStyle(LinearProgressViewStyle())
+                            .onReceive(timer) { _ in
+                                if progress < 100 {
+                                    progress += 1
+                                } else {
+                                    progress = 0
+                                }
+                            }
                     default:
                         Text("Default")
                     }
@@ -138,23 +161,23 @@ struct TestComponentView: View {
                                 .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
                         })
                         .sheet(isPresented: $isCodeBlock, content: {
-                            NavigationView {
-                                GroupBox {
-                                    ForEach(compoenet.codeImage, id: \.self) { image in
-                                        Image(image)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                    }
-                                }.toolbar() {
-                                    ToolbarItem(placement: .primaryAction) {
-                                        Button(action: {
-                                            self.isCodeBlock = false
-                                        }) {
-                                            Text("Done").fontWeight(.semibold)
-                                        }
+                        NavigationView {
+                            GroupBox {
+                                ForEach(compoenet.codeImage, id: \.self) { image in
+                                    Image(image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                }
+                            }.toolbar() {
+                                ToolbarItem(placement: .primaryAction) {
+                                    Button(action: {
+                                        self.isCodeBlock = false
+                                    }) {
+                                        Text("Done").fontWeight(.semibold)
                                     }
                                 }
                             }
+                        }
                     })
 
                     Link(destination: URL(string: compoenet.URL)!, label: {
@@ -172,7 +195,7 @@ struct TestComponentView: View {
 
 struct ComponentView: View {
     let components: [Component]
-    @State private var selection: Set<Component> = [Component(id: 0, name: ComponentName.Alert.rawValue, codeImage: ["Code"], URL: "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l")]
+    @State private var selection: Set<Component> = [Component(id: 0, name: ComponentName.Alert.rawValue, codeImage: ["alert_var", "alert_screenshot"], URL: "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l")]
 
     var body: some View {
         ScrollView {
