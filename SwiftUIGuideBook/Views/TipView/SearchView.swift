@@ -22,7 +22,7 @@ struct SearchBar: View {
             .padding(.vertical, 10)
             .foregroundColor(.gray)
             .padding(.leading, 10)
-            .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.2)))
+            .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.1)))
             .padding(.horizontal, 16)
     }
 }
@@ -33,6 +33,7 @@ struct SearchView: View {
     ]
     @State var searchText = ""
     @State var searching = false
+    @State var isSearchModal: Bool = false
 
     var body: some View {
         VStack {
@@ -46,7 +47,7 @@ struct SearchView: View {
             }
                 .listStyle(GroupedListStyle())
                 .toolbar {
-                if searching {
+                if searching && searchText.count != 0 {
                     Button("Cancel") {
                         searchText = ""
                         withAnimation {
@@ -56,8 +57,33 @@ struct SearchView: View {
                     }
                 }
             }
+                .toolbar {
+                ToolbarItem(placement: .primaryAction,
+                    content: {
+                        Button(action: { isSearchModal = true }) {
+                            Image(systemName: "curlybraces.square")
+                                .font(.system(size: 20))
+                        }
+                            .sheet(isPresented: $isSearchModal) {
+                            NavigationView {
+                                MyWebView(urlToLoad: "https://github.com/MMMIIIN/SwiftUIGuideBook/blob/main/SwiftUIGuideBook/Views/TipView/SearchView.swift")
+                                    .toolbar() {
+                                    ToolbarItem(placement: .primaryAction) {
+                                        Button(action: {
+                                            self.isSearchModal = false
+                                        }) {
+                                            Text("Done").fontWeight(.semibold)
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                )
+            }
         }
-        .navigationBarTitle("Search Bar")
+            .navigationBarTitle("Search Bar")
     }
 }
 

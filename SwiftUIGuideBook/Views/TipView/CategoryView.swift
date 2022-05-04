@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct CategoryView: View {
-    @State private var currentDevice: String = "Mac"
-    private var testList = ["Mac", "iPhone", "iPad", "Apple Watch", "Apple TV", "Accessory"]
+    @State var currentDevice: String = "Mac"
+    var testList = ["Mac", "iPhone", "iPad", "Apple Watch", "Apple TV", "Accessory"]
+    @State var isCategoryModal: Bool = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -37,6 +38,31 @@ struct CategoryView: View {
                     .aspectRatio(contentMode: .fill)
                 }
             }.padding()
+                .toolbar {
+                ToolbarItem(placement: .primaryAction,
+                    content: {
+                    Button(action: { isCategoryModal = true }) {
+                            Image(systemName: "curlybraces.square")
+                                .font(.system(size: 20))
+                        }
+                            .sheet(isPresented: $isCategoryModal) {
+                            NavigationView {
+                                MyWebView(urlToLoad: "https://github.com/MMMIIIN/SwiftUIGuideBook/blob/main/SwiftUIGuideBook/Views/TipView/CategoryView.swift")
+                                    .toolbar() {
+                                    ToolbarItem(placement: .primaryAction) {
+                                        Button(action: {
+                                            self.isCategoryModal = false
+                                        }) {
+                                            Text("Done").fontWeight(.semibold)
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                )
+            }
         }
     }
 }
