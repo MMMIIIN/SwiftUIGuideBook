@@ -32,9 +32,9 @@
 
 
 ## :sparkles: Skills & Tech Stack
-SwiftUI
-WebKit
-MapKit
+- SwiftUI
+- WebKit
+- MapKit
 
 ## :books: Documentation
 
