@@ -22,32 +22,31 @@ struct PickerView: View {
             ColorPicker("Color",
                 selection: $color)
         }
-        .navigationBarTitle("Picker View")
-        .toolbar {
-        ToolbarItem(placement: .primaryAction,
-            content: {
-                Button(action: { isPickerModal = true }) {
-                    Image(systemName: "curlybraces.square")
-                        .font(.system(size: 20))
-                }
-                    .sheet(isPresented: $isPickerModal) {
-                    NavigationView {
-                        MyWebView(urlToLoad: "https://github.com/MMMIIIN/SwiftUIGuideBook/blob/main/SwiftUIGuideBook/Views/TipView/PickerView.swift")
-                            .toolbar() {
-                            ToolbarItem(placement: .primaryAction) {
-                                Button(action: {
-                                    self.isPickerModal = false
-                                }) {
-                                    Text("Done").fontWeight(.semibold)
+            .navigationBarTitle("Picker View")
+            .toolbar {
+            ToolbarItem(placement: .primaryAction,
+                content: {
+                    Button(action: { isPickerModal = true }) {
+                        Image(systemName: "curlybraces.square")
+                            .font(.system(size: 20))
+                    }
+                        .sheet(isPresented: $isPickerModal) {
+                        NavigationView {
+                            MyWebView(urlToLoad: "https://github.com/MMMIIIN/SwiftUIGuideBook/blob/main/SwiftUIGuideBook/Views/TipView/PickerView.swift")
+                                .toolbar() {
+                                ToolbarItem(placement: .primaryAction) {
+                                    Button(action: {
+                                        self.isPickerModal = false
+                                    }) {
+                                        Text("Done").fontWeight(.semibold)
+                                    }
                                 }
                             }
                         }
                     }
-
                 }
-            }
-        )
-    }
+            )
+        }
     }
 }
 

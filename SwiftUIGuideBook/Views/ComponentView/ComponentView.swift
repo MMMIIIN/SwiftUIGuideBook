@@ -72,6 +72,7 @@ struct TestComponentView: View {
                                 playButton
                             })
                             .alert("This is Alert", isPresented: $isAlert) { }
+
                     case ComponentName.ActionSheet.rawValue:
                         Button(action: { isActionSheet = true }, label: {
                                 playButton
@@ -82,6 +83,7 @@ struct TestComponentView: View {
                                 Button("Option 2") { }
                                 Button("Cancle", role: .cancel) { }
                             })
+
                     case ComponentName.ActivityView.rawValue:
                         Button(action: { isActivityView = true }, label: {
                                 playButton
@@ -92,6 +94,7 @@ struct TestComponentView: View {
                                 activityItmes: [URL(string: "https://github.com/MMMIIIN")!]
                             )
                         )
+
                     case ComponentName.Sheet.rawValue:
                         Button(action: { isSheet = true }, label: {
                                 playButton
@@ -110,6 +113,7 @@ struct TestComponentView: View {
                                 }
                             }
                         }
+
                     case ComponentName.FullScreenCover.rawValue:
                         Button(action: { isFullScreenCover = true }, label: {
                                 playButton
@@ -128,11 +132,13 @@ struct TestComponentView: View {
                                 }
                             }
                         }
+
                     case ComponentName.Indicator.rawValue:
                         ProgressView(label: {
                             Text("Loading").font(.caption).foregroundColor(.secondary)
                         }).progressViewStyle(CircularProgressViewStyle())
                             .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
+
                     case ComponentName.ProgressBar.rawValue:
                         ProgressView(value: progress, total: 100,
                             label: {
@@ -150,6 +156,7 @@ struct TestComponentView: View {
                                 progress = 0
                             }
                         }
+
                     default:
                         Text("Default")
                     }

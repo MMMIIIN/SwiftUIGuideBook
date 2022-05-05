@@ -1,5 +1,11 @@
 import SwiftUI
 
+extension UIApplication {
+    func dismissKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct SearchBar: View {
     @Binding var searchText: String
     @Binding var searching: Bool
@@ -77,19 +83,12 @@ struct SearchView: View {
                                     }
                                 }
                             }
-
                         }
                     }
                 )
             }
         }
             .navigationBarTitle("Search Bar")
-    }
-}
-
-extension UIApplication {
-    func dismissKeyboard() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

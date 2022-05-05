@@ -32,11 +32,6 @@ struct CategoryView: View {
                             .padding(.all, 5)
                     }
                 }
-                ScrollView(.horizontal) {
-                    Image("category_screenshot")
-                        .resizable()
-                    .aspectRatio(contentMode: .fill)
-                }
             }.padding()
                 .toolbar {
                 ToolbarItem(placement: .primaryAction,
@@ -58,7 +53,6 @@ struct CategoryView: View {
                                     }
                                 }
                             }
-
                         }
                     }
                 )

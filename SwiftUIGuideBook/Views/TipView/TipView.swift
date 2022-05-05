@@ -15,9 +15,7 @@ struct MyWebView: UIViewRepresentable {
         return webView
     }
 
-    func updateUIView(_ uiView: WKWebView, context: UIViewRepresentableContext<MyWebView>) {
-
-    }
+    func updateUIView(_ uiView: WKWebView, context: UIViewRepresentableContext<MyWebView>) {}
 }
 
 struct TipView: View {
@@ -25,7 +23,6 @@ struct TipView: View {
 
     var body: some View {
         VStack {
-
             List {
                 NavigationLink(destination: CategoryView(), label: {
                         Text("Category View")
@@ -39,7 +36,6 @@ struct TipView: View {
                 NavigationLink(destination: PickerView(), label: {
                         Text("Picker View")
                     })
-
             }
                 .onAppear() {
                 print("testPageBool : \(testPageBool)")
