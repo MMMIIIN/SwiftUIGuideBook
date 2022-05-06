@@ -16,6 +16,7 @@
 		3925A29B281D30F0009387CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3925A29A281D30F0009387CF /* Preview Assets.xcassets */; };
 		3925A2A5281D322F009387CF /* ComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3925A2A4281D322E009387CF /* ComponentView.swift */; };
 		3925A2A7281D3239009387CF /* TipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3925A2A6281D3239009387CF /* TipView.swift */; };
+		39626653282567C60000C75F /* CodeEditorView in Frameworks */ = {isa = PBXBuildFile; productRef = 39626652282567C60000C75F /* CodeEditorView */; };
 		396500BC281FBA2300220927 /* ComponentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396500BB281FBA2300220927 /* ComponentData.swift */; };
 		39F6EE0E2820CB1C0059C657 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6EE0D2820CB1C0059C657 /* SearchView.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39626653282567C60000C75F /* CodeEditorView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +130,9 @@
 			dependencies = (
 			);
 			name = SwiftUIGuideBook;
+			packageProductDependencies = (
+				39626652282567C60000C75F /* CodeEditorView */,
+			);
 			productName = SwiftUIGuideBook;
 			productReference = 3925A290281D30F0009387CF /* SwiftUIGuideBook.app */;
 			productType = "com.apple.product-type.application";
@@ -156,6 +161,9 @@
 				Base,
 			);
 			mainGroup = 3925A287281D30EF009387CF;
+			packageReferences = (
+				39626651282567C60000C75F /* XCRemoteSwiftPackageReference "CodeEditorView" */,
+			);
 			productRefGroup = 3925A291281D30F0009387CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -391,6 +399,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		39626651282567C60000C75F /* XCRemoteSwiftPackageReference "CodeEditorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mchakravarty/CodeEditorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		39626652282567C60000C75F /* CodeEditorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 39626651282567C60000C75F /* XCRemoteSwiftPackageReference "CodeEditorView" */;
+			productName = CodeEditorView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3925A288281D30EF009387CF /* Project object */;
 }

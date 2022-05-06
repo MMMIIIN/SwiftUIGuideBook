@@ -1,4 +1,5 @@
 import SwiftUI
+import CodeEditorView
 
 public struct ActivityView: UIViewControllerRepresentable {
     @Binding var isPresented: Bool
@@ -35,6 +36,15 @@ struct TestComponentView: View {
     @State private var isActivityView: Bool = false
     @State private var isSheet: Bool = false
     @State private var isFullScreenCover: Bool = false
+    @State private var text: String = """
+                        Button(action: { isAlert = true }, label: {
+                                playButton
+                            })
+                            .alert("This is Alert", isPresented: $isAlert) { }
+                        """
+    @State private var position: CodeEditor.Position  = CodeEditor.Position()
+    @State private var messages: Set<Located<Message>> = Set()
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
     var body: some View {
         HStack {
@@ -169,11 +179,9 @@ struct TestComponentView: View {
                         })
                         .sheet(isPresented: $isCodeBlock, content: {
                         GroupBox {
-                            ForEach(compoenet.codeImage, id: \.self) { image in
-                                Image(image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            }
+                            CodeEditor(text: $text, position: $position, messages: $messages, language: .swift)
+                                  .environment(\.codeEditorTheme,
+                                               colorScheme == .dark ? Theme.defaultDark : Theme.defaultLight)
                         }.toolbar() {
                             ToolbarItem(placement: .primaryAction) {
                                 Button(action: {
