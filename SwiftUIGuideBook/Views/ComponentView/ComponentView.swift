@@ -29,20 +29,15 @@ struct TestComponentView: View {
     let compoenet: Component
     let isExpanded: Bool
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-    @State private var progress: Double = 0.0
     @State private var isCodeBlock: Bool = false
     @State private var isAlert: Bool = false
     @State private var isActionSheet: Bool = false
     @State private var isActivityView: Bool = false
     @State private var isSheet: Bool = false
     @State private var isFullScreenCover: Bool = false
-    @State private var text: String = """
-                        Button(action: { isAlert = true }, label: {
-                                playButton
-                            })
-                            .alert("This is Alert", isPresented: $isAlert) { }
-                        """
-    @State private var position: CodeEditor.Position  = CodeEditor.Position()
+    @State private var progress: Double = 0.0
+    @State var text: String
+    @State private var position: CodeEditor.Position = CodeEditor.Position()
     @State private var messages: Set<Located<Message>> = Set()
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
 
@@ -180,8 +175,8 @@ struct TestComponentView: View {
                         .sheet(isPresented: $isCodeBlock, content: {
                         GroupBox {
                             CodeEditor(text: $text, position: $position, messages: $messages, language: .swift)
-                                  .environment(\.codeEditorTheme,
-                                               colorScheme == .dark ? Theme.defaultDark : Theme.defaultLight)
+                                .environment(\.codeEditorTheme,
+                                colorScheme == .dark ? Theme.defaultDark : Theme.defaultLight)
                         }.toolbar() {
                             ToolbarItem(placement: .primaryAction) {
                                 Button(action: {
@@ -208,12 +203,20 @@ struct TestComponentView: View {
 
 struct ComponentView: View {
     let components: [Component]
-    @State private var selection: Set<Component> = [Component(id: 0, name: ComponentName.Alert.rawValue, codeImage: ["alert_var", "alert_screenshot"], URL: "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l")]
+    @State private var selection: Set<Component> = [Component(id: 0, name: ComponentName.Alert.rawValue, URL: "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l",
+        codeText:
+"""
+@State private var isAlert: Bool = false
+ Button(action: { isAlert = true },
+  Text("Alert")}
+   .alert("This is Alert", isPresented: $isAlert) { }
+"""
+        )]
 
     var body: some View {
         ScrollView {
             ForEach(components, id: \.name) { value in
-                TestComponentView(compoenet: value, isExpanded: self.selection.contains(value))
+                TestComponentView(compoenet: value, isExpanded: self.selection.contains(value), text: value.codeText)
                     .onTapGesture { self.selectDeselect(value) }
                     .modifier(ListRowModifier())
                     .animation(Animation.linear(duration: 0.3))
