@@ -1,29 +1,29 @@
 import SwiftUI
 import CodeEditorView
 
-public struct ActivityView: UIViewControllerRepresentable {
-    @Binding var isPresented: Bool
-    public let activityItmes: [Any]
-    public let applicationActivities: [UIActivity]? = nil
-
-    public func makeUIViewController(context: Context) -> UIViewController {
-        UIViewController()
-    }
-
-    public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        let activityViewController = UIActivityViewController(
-            activityItems: activityItmes,
-            applicationActivities: applicationActivities
-        )
-
-        if isPresented && uiViewController.presentedViewController == nil {
-            uiViewController.present(activityViewController, animated: true)
-        }
-        activityViewController.completionWithItemsHandler = { (_, _, _, _) in
-            isPresented = false
-        }
-    }
-}
+//public struct ActivityView: UIViewControllerRepresentable {
+//    @Binding var isPresented: Bool
+//    public let activityItmes: [Any]
+//    public let applicationActivities: [UIActivity]? = nil
+//
+//    public func makeUIViewController(context: Context) -> UIViewController {
+//        UIViewController()
+//    }
+//
+//    public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+//        let activityViewController = UIActivityViewController(
+//            activityItems: activityItmes,
+//            applicationActivities: applicationActivities
+//        )
+//
+//        if isPresented && uiViewController.presentedViewController == nil {
+//            uiViewController.present(activityViewController, animated: true)
+//        }
+//        activityViewController.completionWithItemsHandler = { (_, _, _, _) in
+//            isPresented = false
+//        }
+//    }
+//}
 
 struct TestComponentView: View {
     let compoenet: Component
@@ -40,6 +40,7 @@ struct TestComponentView: View {
     @State private var position: CodeEditor.Position = CodeEditor.Position()
     @State private var messages: Set<Located<Message>> = Set()
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
+
 
     var body: some View {
         HStack {
@@ -94,7 +95,7 @@ struct TestComponentView: View {
                                 playButton
                             })
                             .background(
-                            ActivityView(
+                            ActivityViewKit(
                                 isPresented: $isActivityView,
                                 activityItmes: [URL(string: "https://github.com/MMMIIIN")!]
                             )
@@ -203,19 +204,16 @@ struct TestComponentView: View {
 
 struct ComponentView: View {
     let components: [Component]
-    @State private var selection: Set<Component> = [Component(id: 0, name: ComponentName.Alert.rawValue, URL: "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l",
-        codeText:
-"""
-@State private var isAlert: Bool = false
- Button(action: { isAlert = true },
-  Text("Alert")}
-   .alert("This is Alert", isPresented: $isAlert) { }
-"""
-        )]
+//    private var componentDetails: [ComponentProtocol] = componentDetailCollections
+    @State private var selection: Set<Component> = []
+
+//    init() {
+//        self.componentDetails = componentDetailCollections
+//    }
 
     var body: some View {
         ScrollView {
-            ForEach(components, id: \.name) { value in
+            ForEach(components) { value in
                 TestComponentView(compoenet: value, isExpanded: self.selection.contains(value), text: value.codeText)
                     .onTapGesture { self.selectDeselect(value) }
                     .modifier(ListRowModifier())
@@ -243,8 +241,8 @@ struct ListRowModifier: ViewModifier {
     }
 }
 
-struct ComponentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ComponentView(components: Component.all())
-    }
-}
+//struct ComponentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ComponentView(components: Component.all())
+//    }
+//}

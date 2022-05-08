@@ -1,4 +1,4 @@
-enum ComponentName: String {
+enum ComponentName: String, CaseIterable {
     case Alert = "Alert"
     case ActionSheet = "Action Sheet"
     case ActivityView = "Activity View"

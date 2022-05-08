@@ -6,7 +6,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             TabView(selection: $selection) {
-                    ComponentView(components: Component.all())
+                ComponentView(components: Component.all())
                         .tabItem {
                         Image(systemName: "cube.fill")
                         Text("Component")
