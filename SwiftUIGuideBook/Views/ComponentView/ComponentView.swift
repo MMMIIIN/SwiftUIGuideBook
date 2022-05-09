@@ -1,30 +1,6 @@
 import SwiftUI
 import CodeEditorView
 
-//public struct ActivityView: UIViewControllerRepresentable {
-//    @Binding var isPresented: Bool
-//    public let activityItmes: [Any]
-//    public let applicationActivities: [UIActivity]? = nil
-//
-//    public func makeUIViewController(context: Context) -> UIViewController {
-//        UIViewController()
-//    }
-//
-//    public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//        let activityViewController = UIActivityViewController(
-//            activityItems: activityItmes,
-//            applicationActivities: applicationActivities
-//        )
-//
-//        if isPresented && uiViewController.presentedViewController == nil {
-//            uiViewController.present(activityViewController, animated: true)
-//        }
-//        activityViewController.completionWithItemsHandler = { (_, _, _, _) in
-//            isPresented = false
-//        }
-//    }
-//}
-
 struct TestComponentView: View {
     let compoenet: Component
     let isExpanded: Bool
@@ -204,12 +180,7 @@ struct TestComponentView: View {
 
 struct ComponentView: View {
     let components: [Component]
-//    private var componentDetails: [ComponentProtocol] = componentDetailCollections
     @State private var selection: Set<Component> = []
-
-//    init() {
-//        self.componentDetails = componentDetailCollections
-//    }
 
     var body: some View {
         ScrollView {
@@ -241,8 +212,8 @@ struct ListRowModifier: ViewModifier {
     }
 }
 
-//struct ComponentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ComponentView(components: Component.all())
-//    }
-//}
+struct ComponentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ComponentView(components: Component.all())
+    }
+}
