@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProgressBar: ComponentProtocol {
-    let componentCategory: ComponentName = .ProgressBar
+    let componentCategory: ComponentName = .progressBar
 
     let componentName = "ProgressBar"
 

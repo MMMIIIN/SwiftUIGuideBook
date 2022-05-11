@@ -49,13 +49,13 @@ struct TestComponentView: View {
             if isExpanded {
                 HStack {
                     switch compoenet.name {
-                    case ComponentName.Alert.rawValue:
+                    case ComponentName.alert.rawValue:
                         Button(action: { isAlert = true }, label: {
                                 playButton
                             })
                             .alert("This is Alert", isPresented: $isAlert) { }
 
-                    case ComponentName.ActionSheet.rawValue:
+                    case ComponentName.actionSheet.rawValue:
                         Button(action: { isActionSheet = true }, label: {
                                 playButton
                             })
@@ -66,7 +66,7 @@ struct TestComponentView: View {
                                 Button("Cancle", role: .cancel) { }
                             })
 
-                    case ComponentName.ActivityView.rawValue:
+                    case ComponentName.activityView.rawValue:
                         Button(action: { isActivityView = true }, label: {
                                 playButton
                             })
@@ -77,7 +77,7 @@ struct TestComponentView: View {
                             )
                         )
 
-                    case ComponentName.Sheet.rawValue:
+                    case ComponentName.sheet.rawValue:
                         Button(action: { isSheet = true }, label: {
                                 playButton
                             })
@@ -96,7 +96,7 @@ struct TestComponentView: View {
                             }
                         }
 
-                    case ComponentName.FullScreenCover.rawValue:
+                    case ComponentName.fullScreenCover.rawValue:
                         Button(action: { isFullScreenCover = true }, label: {
                                 playButton
                             })
@@ -115,13 +115,13 @@ struct TestComponentView: View {
                             }
                         }
 
-                    case ComponentName.Indicator.rawValue:
+                    case ComponentName.indicator.rawValue:
                         ProgressView(label: {
                             Text("Loading").font(.caption).foregroundColor(.secondary)
                         }).progressViewStyle(CircularProgressViewStyle())
                             .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
 
-                    case ComponentName.ProgressBar.rawValue:
+                    case ComponentName.progressBar.rawValue:
                         ProgressView(value: progress, total: 100,
                             label: {
                                 Text("Downloading...")

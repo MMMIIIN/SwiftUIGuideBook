@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FullScreenCover: ComponentProtocol {
-    let componentCategory: ComponentName = .FullScreenCover
+    let componentCategory: ComponentName = .fullScreenCover
 
     let componentName = "FullScreenCover"
 

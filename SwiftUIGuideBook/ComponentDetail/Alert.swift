@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Alert: ComponentProtocol {
-    let componentCategory: ComponentName = .Alert
+    let componentCategory: ComponentName = .alert
 
     let componentName = "Alert"
 

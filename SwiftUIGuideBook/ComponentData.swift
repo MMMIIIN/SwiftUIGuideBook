@@ -1,12 +1,12 @@
 enum ComponentName: String, CaseIterable {
-    case Alert = "Alert"
-    case ActionSheet = "Action Sheet"
-    case ActivityView = "Activity View"
-    case Sheet = "Sheet"
-    case FullScreenCover = "Full Screen Cover"
-    case Indicator = "Indicator"
-    case ProgressBar = "Progress Bar"
-    case ColorPicker = "Color Picker"
+    case alert = "Alert"
+    case actionSheet = "Action Sheet"
+    case activityView = "Activity View"
+    case sheet = "Sheet"
+    case fullScreenCover = "Full Screen Cover"
+    case indicator = "Indicator"
+    case progressBar = "Progress Bar"
+    case colorPicker = "Color Picker"
 }
 
 struct Component: Identifiable, Hashable {
@@ -17,7 +17,7 @@ struct Component: Identifiable, Hashable {
 
     static func all() -> [Component] {
         return [
-            Component(id: 0, name: ComponentName.Alert.rawValue, URL: "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l",
+            Component(id: 0, name: ComponentName.alert.rawValue, URL: "https://developer.apple.com/documentation/swiftui/view/alert(_:ispresented:presenting:actions:message:)-8584l",
                 codeText:
                     """
  @State private var isAlert: Bool = false
@@ -26,7 +26,7 @@ struct Component: Identifiable, Hashable {
     .alert("This is Alert", isPresented: $isAlert) { }
 """
             ),
-            Component(id: 1, name: ComponentName.ActionSheet.rawValue, URL: "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-8y541",
+            Component(id: 1, name: ComponentName.actionSheet.rawValue, URL: "https://developer.apple.com/documentation/swiftui/view/confirmationdialog(_:ispresented:titlevisibility:presenting:actions:message:)-8y541",
                 codeText:
                     """
 @State private var isActionSheet: Bool = false
@@ -42,7 +42,7 @@ struct Component: Identifiable, Hashable {
 })
 """
             ),
-            Component(id: 2, name: ComponentName.ActivityView.rawValue, URL: "https://developer.apple.com/documentation/uikit/uiactivity/1620678-activityviewcontroller/",
+            Component(id: 2, name: ComponentName.activityView.rawValue, URL: "https://developer.apple.com/documentation/uikit/uiactivity/1620678-activityviewcontroller/",
                 codeText:
                     """
 public struct ActivityView: UIViewControllerRepresentable {
@@ -77,7 +77,7 @@ public struct ActivityView: UIViewControllerRepresentable {
      activityItmes: [URL(string: "https://github.com/MMMIIIN")!]))
 """
             ),
-            Component(id: 3, name: ComponentName.Sheet.rawValue, URL: "https://developer.apple.com/documentation/SwiftUI/View/sheet(isPresented:onDismiss:content:)",
+            Component(id: 3, name: ComponentName.sheet.rawValue, URL: "https://developer.apple.com/documentation/SwiftUI/View/sheet(isPresented:onDismiss:content:)",
                 codeText:
                     """
 @State private var isSheet: Bool = false
@@ -97,7 +97,7 @@ public struct ActivityView: UIViewControllerRepresentable {
 }
 """
             ),
-            Component(id: 4, name: ComponentName.FullScreenCover.rawValue, URL: "https://developer.apple.com/documentation/swiftui/path/fullscreencover(item:ondismiss:content:)/",
+            Component(id: 4, name: ComponentName.fullScreenCover.rawValue, URL: "https://developer.apple.com/documentation/swiftui/path/fullscreencover(item:ondismiss:content:)/",
                 codeText:
                     """
 @State private var isFullScreenCover: Bool = false
@@ -117,7 +117,7 @@ public struct ActivityView: UIViewControllerRepresentable {
 }
 """
             ),
-            Component(id: 5, name: ComponentName.Indicator.rawValue, URL: "https://developer.apple.com/documentation/swiftui/progressview",
+            Component(id: 5, name: ComponentName.indicator.rawValue, URL: "https://developer.apple.com/documentation/swiftui/progressview",
                 codeText:
                     """
 ProgressView(label: {
@@ -125,7 +125,7 @@ ProgressView(label: {
   .progressViewStyle(CircularProgressViewStyle())
   .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
 """),
-            Component(id: 6, name: ComponentName.ProgressBar.rawValue, URL: "https://developer.apple.com/documentation/swiftui/linearprogressviewstyle",
+            Component(id: 6, name: ComponentName.progressBar.rawValue, URL: "https://developer.apple.com/documentation/swiftui/linearprogressviewstyle",
                 codeText:
                     """
 @State private var progress: Double = 0.0

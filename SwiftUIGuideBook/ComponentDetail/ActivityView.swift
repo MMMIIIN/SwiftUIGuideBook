@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ActivityView: ComponentProtocol {
-    let componentCategory: ComponentName = .ActivityView
+    let componentCategory: ComponentName = .activityView
     let componentName = "Activity View"
 
     let swiftCode = """

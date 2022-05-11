@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ActionSheet: ComponentProtocol {
-    let componentCategory: ComponentName = .ActionSheet
+    let componentCategory: ComponentName = .actionSheet
 
     let componentName = "Action Sheet"
 

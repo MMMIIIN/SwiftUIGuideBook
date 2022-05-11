@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Indicator: ComponentProtocol {
-    let componentCategory: ComponentName = .Indicator
+    let componentCategory: ComponentName = .indicator
 
     let componentName = "Indicator"
 

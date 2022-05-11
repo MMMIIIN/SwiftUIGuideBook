@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Sheet: ComponentProtocol {
-    let componentCategory: ComponentName = .Sheet
+    let componentCategory: ComponentName = .sheet
 
     let componentName = "Sheet"
 

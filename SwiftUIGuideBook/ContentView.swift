@@ -26,18 +26,6 @@ struct ContentView: View {
                 .navigationBarTitle(selection == 1 ? "Component" : "Tip", displayMode: .inline)
         }
     }
-    
-//    private var playButton: some View {
-//        HStack {
-//            Image(systemName: "play.fill")
-//                .foregroundColor(.white)
-//            Text("Play")
-//                .foregroundColor(.white)
-//        }
-//            .padding(.init(top: 5, leading: 10, bottom: 5, trailing: 10))
-//            .background(RoundedRectangle(cornerRadius: 20).fill(.blue))
-//            .frame(width: UIScreen.main.bounds.width * 0.28, alignment: .center)
-//    }
 }
 
 extension View {
